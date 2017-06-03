@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
-from pandas.io.data import get_data_yahoo
+#from pandas.io.data import get_data_yahoo
+from pandas_datareader import get_data_yahoo
 
 from tia.analysis.perf import periods_in_year
 from tia.analysis.model.interface import CostCalculator, EodMarketData
@@ -212,7 +213,7 @@ def get_dividends_yahoo(sid, start, end):
 
 
 def load_yahoo_stock(sids, start=None, end=None, dvds=True):
-    if hasattr(sids, '__iter__') and not isinstance(sids, basestring):
+    if hasattr(sids, '__iter__') and not isinstance(sids,str):
         return Instruments([load_yahoo_stock(sid, start=start, end=end, dvds=dvds) for sid in sids])
     else:
         sid = sids
